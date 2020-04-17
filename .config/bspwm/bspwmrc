@@ -1,0 +1,47 @@
+#! /bin/sh
+
+#Windows gap
+bspc config window_gap          12
+
+#Various settings
+bspc config gapless_monocle      false
+bspc config borderless_monocle   false
+bspc config pointer_follows_focus true
+bspc config focus_follows_pointer true
+bspc config single monocle true
+
+#colors
+bspc config border_width         2
+bspc config focus_border_color "#30c0a5"
+bspc config normal_border_color "282a36"
+bspc config presel_feedback_color "3b3d4a"
+
+#Settings for manual splitting
+bspc config split_ratio          0.52
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+#keybinding daemon
+killall sxhkd ;sxhkd &
+
+#load xresources
+xrdb .Xresources
+
+#fix capslock hardware problem
+setxkbmap -option caps:escape &
+
+#polybar
+polybar example &
+
+#wallpaper and theme coloring
+feh --bg-fill ~/Wallpaper/wallpaper.png
+exec $HOME/.config/wpg/wp_init.sh
+
+#rules
+#bspc rule -a Gimp desktop='^8' state=floating follow=on
+#bspc rule -a Chromium desktop='^2'
+#bspc rule -a mplayer2 state=floating
+#bspc rule -a Kupfer.py focus=on
+#bspc rule -a Screenkey manage=off
+
+bash /home/dorzac/.config/bspwm/bspwm_colors.sh &
